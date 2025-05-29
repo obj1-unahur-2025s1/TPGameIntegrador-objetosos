@@ -2,14 +2,47 @@
 object juego {
   //var property patitos = [new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = )]
 
+    method configurar(){
+		game.width(900)
+		game.height(900)
+		game.boardGround("fondo.jpg")
+	} 
 
-    method iniciar {
-        
-
-
-
-    }
+   
+    
 }
+
+
+class Patito {
+	 
+	var position
+
+	method image() = "patito.jpg"
+	method position() = position
+	
+	method posicionar() {
+		// position = game.at(game.width()-1,suelo.position().y())
+	}
+
+	method iniciar(){
+		self.posicionar()
+		game.onTick(velocidad,"moverCactus",{self.mover()})
+	}
+	
+	method mover(){
+		position = position.left(1)
+		if (position.x() == -1)
+			self.posicionar()
+	}
+	
+	method chocar(){
+		juego.terminar()
+	}
+    method detener(){
+		game.removeTickEvent("moverCactus")
+	}
+}
+
 
 
 object mira {
