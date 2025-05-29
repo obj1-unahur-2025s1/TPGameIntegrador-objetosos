@@ -22,7 +22,7 @@ class Patito {
     var detonado = false
     var subio = false
 
-	method image() = "patito.jpg"
+	method image() = if (not detonado) "patito.jpg" else "pumm.jpg"
 
 	method position() = position
 	
@@ -34,21 +34,30 @@ class Patito {
     method subirBajar()  { 
         if (subio) {
             position = position.down(1)
+            subio = false
         }
         else {
             position = position.up(1)
+            subio = true
         }
     }
 
     method detonarse(){
-		game.removeTickEvent("")
+        detonado = true
+		game.removeTickEvent("subir y bajar")
+        self.image()
+        game.schedule(1500, {game.removeVisual(self)})
 	} 
 }
 
 
-
 object mira {
-//game.onSameCell(patito.position(), mira.position())
+    var posicion = null
+    method posicion() = posicion
+    method disparar() {
+        if (game.onSameCell(Patito.position(), self.posicion())) Patito.detonarse()
+    }
+//
 }
 
 /*class Patito {
