@@ -1,4 +1,4 @@
-![Banner ](Patitos Pepones by Objetosos.png)
+![banner patitos](banner.png)
 # Patitos Pepones
 
 ## Equipo de desarrollo
