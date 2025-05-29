@@ -8,48 +8,50 @@ object juego {
 		game.boardGround("fondo.jpg")
 	} 
 
-   
+    method terminar() {}
+
+    method gameOver() {}
+
+    
     
 }
 
 
 class Patito {
-	 
 	var position
+    var detonado = false
+    var subio = false
 
 	method image() = "patito.jpg"
+
 	method position() = position
 	
-	method posicionar() {
-		// position = game.at(game.width()-1,suelo.position().y())
+	method moverse() {
+		game.onTick(1000,"subir y bajar",{self.subirBajar()})
 	}
 
-	method iniciar(){
-		self.posicionar()
-		game.onTick(velocidad,"moverCactus",{self.mover()})
-	}
-	
-	method mover(){
-		position = position.left(1)
-		if (position.x() == -1)
-			self.posicionar()
-	}
-	
-	method chocar(){
-		juego.terminar()
-	}
-    method detener(){
-		game.removeTickEvent("moverCactus")
-	}
+
+    method subirBajar()  { 
+        if (subio) {
+            position = position.down(1)
+        }
+        else {
+            position = position.up(1)
+        }
+    }
+
+    method detonarse(){
+		game.removeTickEvent("")
+	} 
 }
 
 
 
 object mira {
-
+//game.onSameCell(patito.position(), mira.position())
 }
 
-class Patito {
+/*class Patito {
     var position = null
 
     method image() = "patito.png"
@@ -77,3 +79,19 @@ class Patito {
         game.removeTickEvent("moverPatito")
     }
 }
+
+
+game.onTick(1000, "subir y bajar", patitos.forEach { patito => patito.subirBajar() }
+
+object patito {
+  var subio = false
+
+  method subirBajar()  { 
+    if (subio) {
+      position = position.down(1)
+     } else {
+        position = position.up(1)
+    }
+} 
+
+*/
