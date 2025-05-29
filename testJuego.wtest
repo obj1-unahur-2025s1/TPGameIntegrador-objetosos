@@ -1,9 +1,0 @@
-import juego.*
-
-describe "group of tests for pepita" {
-
-  test "pepita has initial energy" {
-    
-  }
-
-}

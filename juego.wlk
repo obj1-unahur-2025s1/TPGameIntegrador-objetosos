@@ -3,24 +3,40 @@ object juego {
         // añadimos interfaz
         game.addVisual(tiempo)
         game.addVisual(patitosDetonados)
-
         // añadimos patitos y mira
         //var patitos = [new Patito()]
-        var patito1 = new 
-        Patito()
+        var patito1 = new Patito()
         game.addVisual(patito1)
         game.addVisual(mira)
-        game.addVisual(prueba)
-        game.addVisual(prueba2)
-
         // que cada un segundo, se muevan
-        game.onTick(1000, "movimiento", { [patito1, mira].forEach {
-            objeto => objeto.moverse()
-        }} )
+        game.onTick(1000, "movimiento", { 
+            [patito1, mira].forEach { objeto => objeto.moverse() }
+            })
+     // para que el tiempo se actualice
+        game.onTick(1000, "tiempo", {
+            tiempo.pasarTiempo()
+            if (tiempo.contador() == 0) {
+                game.stop()
+            }
+        })       
     }
 }
+//Temporizador
+object cronometro {
+    var tiempo = 0
+    const blanco = "#000000"
+
+    method text() = "tiempo restante: " + tiempo.toString()
+    method textColor() = blanco
+    method tiempo() = tiempo
 
 
+    method position() = game.at(1, game.height()-1)
+
+    method pasarTiempo() {
+        tiempo = tiempo - 1
+    }
+}
 class Patito {
     var property position = game.at(14, 4)
     var property image = "patito.png"
@@ -29,18 +45,26 @@ class Patito {
     method moverse() {
         position = position.left(1)
     }
-
-
-    // method subirBajar()  { 
-    //     if (subio) {
-    //         position = position.down(1)
-    //     }
-    //     else {
-    //         position = position.up(1)
-    //     }
-    // }
+    method subirBajar()  { 
+         if (subio) {
+             position = position.down(1)
+         }
+        else {
+                position = position.up(1)
+         }
+        }
 }
+// interfaz
+object tiempo {
+    var property position = game.at(1, 8)
+    method text() = "Tiempo: " + self.contador()
 
+    var contador = 30
+    method contador() = contador
+    method pasarTiempo() {
+        contador = (contador - 1).max(0)
+    }
+}
 object mira {
     var property image = "mira.png"
     var property position = game.at(0, 4)
@@ -55,20 +79,9 @@ object mira {
     }
 }
 
-// interfaz
-object tiempo {
-    var property position = game.at(2, 8)
-    var property text = "Tiempo: " + self.contador()
-
-    var contador = 30
-    method contador() = contador
-    method pasarTiempo() {
-        text = (text - 1).max(0)
-    }
-}
 
 object patitosDetonados {
-    var property position = game.at(4, 8)
+    var property position = game.at(1, 8)
     var property text = "Patitos: " + self.cantidad()
 
     var cantidad = 0
@@ -76,16 +89,6 @@ object patitosDetonados {
     method sumar() {
         cantidad += 1
     }
-}
-
-object prueba {
-  var property position = game.at(0, 6)
-  method text() = "0, 6"
-}
-
-object prueba2 {
-  var property position = game.at(6, 0)
-  method text() = "6, 0"
 }
 /*object juego {
   //var property patitos = [new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = )]
