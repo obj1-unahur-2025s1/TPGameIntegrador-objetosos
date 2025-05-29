@@ -1,0 +1,13 @@
+import wollok.game.*
+
+import juegoCopy.*
+
+program FeriaJuego {
+	game.width(15)
+	game.height(9)
+	// game.boardGround("fondo.jpg")
+
+	juegoCopia.iniciar()
+	game.start()
+}
+
