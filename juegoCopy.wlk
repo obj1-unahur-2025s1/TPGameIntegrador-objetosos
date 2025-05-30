@@ -1,28 +1,49 @@
 object juegoCopia {
     method iniciar() {
+        game.clear()
         // añadimos interfaz
         game.addVisual(tiempo)
         game.addVisual(patitosDetonados)
 
         // añadimos patitos y mira
-        //var patitos = [new Patito()]
-        var patito1 = new 
-        Patito()
-        game.addVisual(patito1)
+        var patitos = [new Patito(ejeX = 14), new Patito(ejeX = 16), new Patito(ejeX = 18), new Patito(ejeX = 20), new Patito(ejeX = 22),new Patito(ejeX = 24)]
+        patitos.forEach { patito => game.addVisual(patito)}
         game.addVisual(mira)
         game.addVisual(prueba)
         game.addVisual(prueba2)
 
         // que cada un segundo, se muevan
-        game.onTick(1000, "movimiento", { [patito1, mira].forEach {
-            objeto => objeto.moverse()
-        }} )
+        game.onTick(250, "movimiento", { 
+            patitos.forEach { patito => patito.moverse() }
+            mira.moverse()
+            if (mira.position().x() == game.width() - 1 or mira.position().x() == 0) {
+                mira.cambiarDireccion()
+            }
+            })
+        
+        // para que el tiempo se actualice
+        game.onTick(1000, "tiempo", {
+            tiempo.restar()
+            if (tiempo.contador() == 0) {
+                game.addVisual(new Texto(text="Se acabo el tiempo", position=game.center()))
+                game.addVisual(new Texto(text="¿Jugar de vuelta? (R)", position = game.center()))
+            }
+        })
+        
+        // matar patito
+        keyboard.space().onPressDo {
+            var patitoEncontrado = patitos.find { patito => game.onSameCell(patito.position(), mira.position())}
+            if (patitoEncontrado != null) {
+                game.removeVisual(patitoEncontrado)
+                patitosDetonados.sumar()
+            }
+        }
+        }
     }
-}
-
 
 class Patito {
-	var property position = game.at(15, 4)
+    var ejeX 
+	var property position = game.at(ejeX, 4)
     var property image = "patito.png"
     method position() = position
 
@@ -53,23 +74,41 @@ object mira {
             position = position.left(1)
         }
     }
+
+    method cambiarDireccion() {
+        dirDerecha = !dirDerecha
+    }
+}
+
+class Texto {
+    var property position
+    var property text
+    var property textColor = "#646464"
+} 
+
+object tiempoFuera {
+    var property position = game.center()
+    var property textColor = "#646464"
+    var property text = "¡Tiempo!"
 }
 
 // interfaz
 object tiempo {
     var property position = game.at(2, 8)
-    var property text = "Tiempo: " + self.contador()
+    method text() = "Tiempo: " + self.contador()
+    var property textColor = "#646464"
 
     var contador = 30
     method contador() = contador
-    method pasarTiempo() {
-        text = (text - 1).max(0)
+    method restar() {
+        contador = (contador - 1).max(0)
     }
 }
 
 object patitosDetonados {
     var property position = game.at(4, 8)
-    var property text = "Patitos: " + self.cantidad()
+    method text() = "Patitos: " + self.cantidad()
+    var property textColor = "#646464"
 
     var cantidad = 0
     method cantidad() = cantidad
