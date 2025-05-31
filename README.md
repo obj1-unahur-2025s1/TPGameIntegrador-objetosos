@@ -12,7 +12,8 @@
 
 ## Capturas
 
-(agregar)
+![captura 1](diseñoConceptual.png)
+-Diseño conceptual
 
 ## Reglas de Juego / Instrucciones
 

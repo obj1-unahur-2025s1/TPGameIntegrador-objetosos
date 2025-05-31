@@ -1,5 +1,90 @@
-
 object juego {
+    method iniciar() {
+        game.addVisual(tiempo) // interfaz
+        game.addVisual(patitosDetonados) // interfaz
+        //      var patitos = [new Patito()]
+        var patito1 = new Patito()
+        game.addVisual(patito1)
+        game.addVisual(mira)
+        //   que cada un segundo, se muevan
+        game.onTick(1000, "movimiento", { 
+            [patito1, mira].forEach { objeto => objeto.moverse() }
+            })
+        //   para que el tiempo se actualice
+        game.onTick(1000, "tiempo", {
+            tiempo.pasarTiempo()
+            if (tiempo.contador() == 0) {
+                game.stop()
+            }
+        })       
+    }
+}
+// Temporizador
+object cronometro {
+    var tiempo = 0
+    const blanco = "#000000"
+
+    method text() = "tiempo restante: " + tiempo.toString()
+    method textColor() = blanco
+    method tiempo() = tiempo
+
+
+    method position() = game.at(1, game.height()-1)
+
+    method pasarTiempo() {
+        tiempo = tiempo - 1
+    }
+}
+class Patito {
+    var property position = game.at(14, 4)
+    var property image = "patito.png"
+    method position() = position
+
+    method moverse() {
+        position = position.left(1)
+    }
+    method subirBajar()  { 
+         if (subio) {
+             position = position.down(1)
+         }
+        else {
+                position = position.up(1)
+         }
+        }
+}
+// interfaz
+object tiempo {
+    var property position = game.at(1, 8)
+    method text() = "Tiempo: " + self.contador()
+    var contador = 30
+    method contador() = contador
+    method pasarTiempo() {
+        contador = (contador - 1).max(0)
+    }
+}
+object mira {
+    var property image = "mira.png"
+    var property position = game.at(0, 4)
+    var dirDerecha = true
+    method moverse() {
+        if (dirDerecha) {
+            position = position.right(1)
+        } else {
+            position = position.left(1)
+        }
+    }
+}
+object patitosDetonados {
+    var property position = game.at(1, 7)
+    var property text = "Patitos: " + self.cantidad()
+
+    var cantidad = 0
+    method cantidad() = cantidad
+    method sumar() {
+        cantidad += 1
+    }
+}
+/*object juego {
   //var property patitos = [new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = ), new Patito(ubicacion = )]
 
     method configurar(){
@@ -22,7 +107,7 @@ class Patito {
     var detonado = false
     var subio = false
 
-	method image() = "patito.jpg"
+	method image() = if (not detonado) "patito.jpg" else "pumm.jpg"
 
 	method position() = position
 	
@@ -34,24 +119,33 @@ class Patito {
     method subirBajar()  { 
         if (subio) {
             position = position.down(1)
+            subio = false
         }
         else {
             position = position.up(1)
+            subio = true
         }
     }
 
     method detonarse(){
-		game.removeTickEvent("")
+        detonado = true
+		game.removeTickEvent("subir y bajar")
+        self.image()
+        game.schedule(1500, {game.removeVisual(self)})
 	} 
 }
 
 
-
 object mira {
-//game.onSameCell(patito.position(), mira.position())
+    var posicion = null
+    method posicion() = posicion
+    method disparar() {
+        if (game.onSameCell(Patito.position(), self.posicion())) Patito.detonarse()
+    }
+//
 }
 
-/*class Patito {
+class Patito {
     var position = null
 
     method image() = "patito.png"

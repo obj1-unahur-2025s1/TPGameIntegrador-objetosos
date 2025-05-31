@@ -2,16 +2,10 @@ import wollok.game.*
 
 import juego.*
 
-program PepitaGame {
-	game.title("Pepita")
-	game.height(10)
-	game.width(10)
-
-	game.boardGround("fondo.jpg")
-
-	//
-
-	// game.showAttributes(pepita) //Debug
-
-	game.start()
+program FeriaJuego {
+    game.width(15)
+    game.height(9)
+    game.boardGround("fondo.jpg")
+    juego.iniciar()
+    game.start()
 }
