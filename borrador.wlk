@@ -1,4 +1,16 @@
-object juego {
+import wollok.game.*
+
+import juego.*
+
+program FeriaJuego {
+    game.width(15)
+    game.height(9)
+    game.boardGround("fondo.jpg")
+    juego.iniciar()
+    game.start()
+}
+
+juego {
     method iniciar() {
         game.addVisual(tiempo) // interfaz
         game.addVisual(patitosDetonados) // interfaz
