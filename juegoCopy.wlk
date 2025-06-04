@@ -1,5 +1,7 @@
+import juego.*
 object juegoCopia {
     method iniciar() {
+        [contadorBalas, tiempo, patitosDetonados].forEach { interfaz => interfaz.reiniciar()}
         game.clear()
 
         // añadimos interfaz
@@ -30,7 +32,7 @@ object juegoCopia {
         // para que el tiempo se actualice
         game.onTick(1000, "tiempo", {
             tiempo.restar()
-            if (tiempo.contador() == 0 or contadorBalas().balas() == 0) {
+            if (tiempo.contador() == 0 or contadorBalas.noTieneBalas()) {
                 game.addVisual(new Texto(text="¡Tiempo!", position=game.center()))
                 game.addVisual(new Texto(text="¿Jugar de vuelta? (R)", position = game.at(7, 3)))
                 game.removeVisual(mira)
@@ -63,16 +65,6 @@ class Patito {
 	method moverse() {
         position = position.left(1)
 	}
-
-
-    // method subirBajar()  { 
-    //     if (subio) {
-    //         position = position.down(1)
-    //     }
-    //     else {
-    //         position = position.up(1)
-    //     }
-    // }
 }
 
 object mira {
@@ -116,6 +108,9 @@ object tiempo {
     method restar() {
         contador = (contador - 1).max(0)
     }
+    method reiniciar() {
+        contador = 10
+    }
 }
 
 object patitosDetonados {
@@ -128,6 +123,9 @@ object patitosDetonados {
     method sumar() {
         cantidad += 1
     }
+    method reiniciar() {
+        cantidad = 0
+    }
 }
 
 object contadorBalas {
@@ -139,6 +137,12 @@ object contadorBalas {
     method balas() = balas
     method gastarBala() {
         balas = (balas - 1).max(0)
+    }
+    method noTieneBalas() {
+        return balas == 00
+    }
+    method reiniciar() {
+        balas = 10
     }
 }
 
