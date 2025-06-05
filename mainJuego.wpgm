@@ -1,8 +1,11 @@
 import wollok.game.*
 
 import juego.*
+import visuales.*
+import sonidos.*
 
 program FeriaJuego {
+	game.title("Patitos Pepones")
 	game.width(15)
 	game.height(9)
 	game.boardGround("fondoNuevo.png")
@@ -11,4 +14,3 @@ program FeriaJuego {
 	juego.iniciar()
 	game.start()
 }
-
