@@ -5,8 +5,9 @@ import juego.*
 program FeriaJuego {
 	game.width(15)
 	game.height(9)
-	game.boardGround("fondo.png")
+	game.boardGround("fondoNuevo.png")
 
+	cancionFondo.play()
 	juego.iniciar()
 	game.start()
 }
