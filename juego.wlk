@@ -1,4 +1,4 @@
-object juegoCopia {
+object juego {
     method iniciar() {
         game.clear()
 
