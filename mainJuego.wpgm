@@ -1,13 +1,13 @@
 import wollok.game.*
 
-import juegoCopy.*
+import juego.*
 
 program FeriaJuego {
 	game.width(15)
 	game.height(9)
-	//game.boardGround("fondo.png")
+	game.boardGround("fondo.png")
 
-	juegoCopia.iniciar()
+	juego.iniciar()
 	game.start()
 }
 
