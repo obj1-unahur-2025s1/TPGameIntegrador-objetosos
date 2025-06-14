@@ -8,15 +8,15 @@ object prueba2 {
   method text() = "6, 0"
 }
 
-object pantallaInicio1 {
-    var property image = "pantallaInicio1.png"
-    var property position = game.at(1, 1)
-}
+// object pantallaInicio1 {
+//     var property image = "pantallaInicio1.png"
+//     var property position = game.at(1, 1)
+// }
 
-object pantallaInicio2 {
-    var property image = "pantallaInicio2.png"
-    var property position = game.at(1, 1)
-}
+// object pantallaInicio2 {
+//     var property image = "pantallaInicio2.png"
+//     var property position = game.at(1, 1)
+// }
 
 
 class Patito {
@@ -143,3 +143,15 @@ object contadorBalas {
     }
 }
 
+// Imagen de inicio niveles 
+object imagenInicio1 {
+    method image() = "fondoInicioChico.png"
+    method position() = game.at(0.4, 0.4)
+}
+
+
+// Imagen de inicio nivel 2
+object imagenInicio2 {
+    method image() = "fondoInicio2.png"
+    method position() = game.at(0.4, 0.4)
+}
