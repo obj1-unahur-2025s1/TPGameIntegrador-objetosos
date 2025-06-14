@@ -8,6 +8,17 @@ object prueba2 {
   method text() = "6, 0"
 }
 
+object pantallaInicio1 {
+    var property image = "pantallaInicio1.png"
+    var property position = game.at(1, 1)
+}
+
+object pantallaInicio2 {
+    var property image = "pantallaInicio2.png"
+    var property position = game.at(1, 1)
+}
+
+
 class Patito {
     var ejeX 
 	var property position = game.at(ejeX, 4)
@@ -21,17 +32,16 @@ class Patito {
 }
 
 class PatitoAlternativo inherits Patito {
-    var subio = false
+    var subio = true
 
     method subirBajar()  { 
         if (subio) {
             position = position.down(1)
-            subio = !subio
         }
         else {
             position = position.up(1)
-            subio = !subio
         }
+        subio = !subio
     }
 
     override method moverse() {
