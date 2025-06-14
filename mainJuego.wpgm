@@ -8,7 +8,7 @@ program FeriaJuego {
 	game.title("Patitos Pepones")
 	game.width(14.2)
 	game.height(8)
-	// game.cellSize(60)
+	// game.cellSize(100)
 	game.boardGround("fondoNuevo.png")
 
 	cancionFondo.play()

@@ -145,13 +145,13 @@ object contadorBalas {
 
 // Imagen de inicio niveles 
 object imagenInicio1 {
-    method image() = "fondoInicioChico.png"
-    method position() = game.at(0.4, 0.4)
+    method image() = "inicio1.png"
+    method position() = game.origin()
 }
 
 
 // Imagen de inicio nivel 2
 object imagenInicio2 {
-    method image() = "fondoInicio2.png"
-    method position() = game.at(0.4, 0.4)
+    method image() = "inicio2.png"
+    method position() = game.origin()
 }
