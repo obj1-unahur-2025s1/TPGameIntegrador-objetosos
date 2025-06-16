@@ -8,17 +8,10 @@ object juego {
     method iniciar() {
         game.clear()
 
-        // Imagen de inicio 1:
+        //Imagenes de pantalla de inicio:
         game.addVisual(imagenInicio1)
         keyboard.enter().onPressDo { game.removeVisual(imagenInicio1)}
         keyboard.enter().onPressDo {game.addVisual(imagenInicio2)}    
-
-
-		// game.addVisual(pantallaInicio1)
-		// keyboard.space().onPressDo({ 
-        //     game.removeVisual(pantallaInicio1)
-        //     game.addVisual(pantallaInicio2)
-        //  })
 
         keyboard.num1().onPressDo( {
             objetos = [new Patito(ejeX = 14), new Patito(ejeX = 16), new Patito(ejeX = 18), new Patito(ejeX = 20), new Patito(ejeX = 22), new Patito(ejeX = 24), new Patito(ejeX = 26), new Patito(ejeX = 28), new Patito(ejeX = 30), new Patito(ejeX = 32), new Patito(ejeX = 34), new Cofre(ejeX = 36), new Patito(ejeX = 38), new Patito(ejeX = 40), new Reloj(ejeX=42), new Patito(ejeX = 44), new Patito(ejeX = 46), new Patito(ejeX = 48), new Patito(ejeX = 50), new Patito(ejeX = 52), new Patito(ejeX = 54), new Patito(ejeX = 56), new Patito(ejeX = 58), new Patito(ejeX = 60), new Patito(ejeX = 62), new Patito(ejeX = 64), new Patito(ejeX = 66), new Patito(ejeX = 68), new Patito(ejeX = 70), new Patito(ejeX = 72)]
@@ -43,8 +36,6 @@ object juego {
         // añadimos patitos y mira
         objetos.forEach { patito => game.addVisual(patito) }
         game.addVisual(mira)
-        game.addVisual(prueba)
-        game.addVisual(prueba2)
 
         // que cada un segundo, se muevan
         game.onTick(250, "movimiento", { 
@@ -93,6 +84,3 @@ object juego {
         }
     }
 }
-
-
-// var objetosDificiles = [new Patito(ejeX = 14), new PatitoAlternativo(ejeX = 16), new Patito(ejeX = 18), new Patito(ejeX = 20), new PatitoAlternativo(ejeX = 22), new Patito(ejeX = 24), new Patito(ejeX = 26), new PatitoAlternativo(ejeX = 28), new Patito(ejeX = 30), new Patito(ejeX = 32), new Patito(ejeX = 34), new Patito(ejeX = 38), new Patito(ejeX = 40), new PatitoAlternativo(ejeX = 44), new Patito(ejeX = 46), new Patito(ejeX = 48), new Patito(ejeX = 50), new Patito(ejeX = 52), new Patito(ejeX = 54), new Patito(ejeX = 56), new Patito(ejeX = 58), new Patito(ejeX = 60), new PatitoAlternativo(ejeX = 62), new PatitoAlternativo(ejeX = 64), new Patito(ejeX = 66), new Patito(ejeX = 68), new Patito(ejeX = 70), new Patito(ejeX = 72)]

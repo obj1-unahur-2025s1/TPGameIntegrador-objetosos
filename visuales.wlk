@@ -1,24 +1,4 @@
-object prueba {
-  var property position = game.at(0, 6)
-  method text() = "0, 6"
-}
-
-object prueba2 {
-  var property position = game.at(6, 0)
-  method text() = "6, 0"
-}
-
-// object pantallaInicio1 {
-//     var property image = "pantallaInicio1.png"
-//     var property position = game.at(1, 1)
-// }
-
-// object pantallaInicio2 {
-//     var property image = "pantallaInicio2.png"
-//     var property position = game.at(1, 1)
-// }
-
-
+// Elementos del visuales: 
 class Patito {
     var ejeX 
 	var property position = game.at(ejeX, 4)
@@ -60,7 +40,6 @@ class Reloj inherits Patito {
     override method tipo() = "Reloj"
 }
 
-
 object mira {
     var property image = "mira.png"
     var property position = game.at(0, 4)
@@ -91,7 +70,6 @@ object tiempoFuera {
     var property text = "¡Tiempo!"
 }
 
-// interfaz
 object tiempo {
     var property position = game.at(2, 8)
     method text() = "Tiempo: " + self.contador()
@@ -143,14 +121,13 @@ object contadorBalas {
     }
 }
 
-// Imagen de inicio niveles 
+// Imagen de inicio 
 object imagenInicio1 {
     method image() = "inicio1.png"
     method position() = game.origin()
 }
 
-
-// Imagen de inicio nivel 2
+// Imagen de inicio 2 
 object imagenInicio2 {
     method image() = "inicio2.png"
     method position() = game.origin()
