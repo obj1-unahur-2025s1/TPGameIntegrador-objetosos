@@ -10,21 +10,29 @@ object juego {
 
         //Imagenes de pantalla de inicio:
         game.addVisual(imagenInicio1)
-        keyboard.enter().onPressDo { game.removeVisual(imagenInicio1)}
-        keyboard.enter().onPressDo {game.addVisual(imagenInicio2)}    
+        keyboard.enter().onPressDo { 
+            game.removeVisual(imagenInicio1)
+            game.addVisual(imagenInicio2)
+            quack.play()
+        }
 
         keyboard.num1().onPressDo( {
-            objetos = [new Patito(ejeX = 14), new Patito(ejeX = 16), new Patito(ejeX = 18), new Patito(ejeX = 20), new Patito(ejeX = 22), new Patito(ejeX = 24), new Patito(ejeX = 26), new Patito(ejeX = 28), new Patito(ejeX = 30), new Patito(ejeX = 32), new Patito(ejeX = 34), new Cofre(ejeX = 36), new Patito(ejeX = 38), new Patito(ejeX = 40), new Reloj(ejeX=42), new Patito(ejeX = 44), new Patito(ejeX = 46), new Patito(ejeX = 48), new Patito(ejeX = 50), new Patito(ejeX = 52), new Patito(ejeX = 54), new Patito(ejeX = 56), new Patito(ejeX = 58), new Patito(ejeX = 60), new Patito(ejeX = 62), new Patito(ejeX = 64), new Patito(ejeX = 66), new Patito(ejeX = 68), new Patito(ejeX = 70), new Patito(ejeX = 72)]
-            self.configurate() })
+            objetos = [new Patito(ejeX = 14), new Patito(ejeX = 16), new Patito(ejeX = 18), new Patito(ejeX = 20), new Patito(ejeX = 22), new Patito(ejeX = 24), new Patito(ejeX = 26), new Patito(ejeX = 28), new Patito(ejeX = 30), new Patito(ejeX = 32), new Patito(ejeX = 34), new Cofre(ejeX = 36), new Patito(ejeX = 38), new Patito(ejeX = 40), new Reloj(ejeX=42), new Patito(ejeX = 44), new Patito(ejeX = 46), new Patito(ejeX = 48), new Patito(ejeX = 50), new Patito(ejeX = 52), new Patito(ejeX = 54), new Patito(ejeX = 56), new Patito(ejeX = 58), new Patito(ejeX = 60), new Patito(ejeX = 62), new Patito(ejeX = 64), new Patito(ejeX = 66), new Patito(ejeX = 68), new Patito(ejeX = 70), new Patito(ejeX = 72), new Patito(ejeX = 74), new Patito(ejeX = 76), new Patito(ejeX = 78), new Patito(ejeX = 80), new Patito(ejeX = 82), new Patito(ejeX = 84), new Patito(ejeX = 86), new Patito(ejeX = 88), new Cofre(ejeX = 90), new Patito(ejeX = 92), new Patito(ejeX = 94), new Patito(ejeX = 96), new Patito(ejeX = 98), new Patito(ejeX = 100), new Patito(ejeX = 102), new Patito(ejeX = 104), new Patito(ejeX = 106), new Patito(ejeX = 108), new Patito(ejeX = 110)]
+            self.configurate() 
+            quack.play()
+            })
         keyboard.num2().onPressDo({
-            objetos = [new Patito(ejeX = 14), new PatitoAlternativo(ejeX = 16), new Patito(ejeX = 18), new Patito(ejeX = 20), new PatitoAlternativo(ejeX = 22, subio = false), new Patito(ejeX = 24), new Patito(ejeX = 26), new PatitoAlternativo(ejeX = 28), new Patito(ejeX = 30), new Patito(ejeX = 32), new Patito(ejeX = 34), new Patito(ejeX = 36), new Patito(ejeX = 38), new PatitoAlternativo(ejeX = 40, subio = false), new Patito(ejeX = 42), new Patito(ejeX = 44), new Patito(ejeX = 46), new Patito(ejeX = 48), new Patito(ejeX = 50), new Patito(ejeX = 52), new Patito(ejeX = 54), new Patito(ejeX = 56), new PatitoAlternativo(ejeX = 58, subio =false), new PatitoAlternativo(ejeX = 60), new Patito(ejeX = 62), new Patito(ejeX = 64), new Patito(ejeX = 66), new Patito(ejeX = 68)]
-            self.configurate() })
+            objetos = [new Patito(ejeX = 14), new PatitoAlternativo(ejeX = 16), new Patito(ejeX = 18), new Patito(ejeX = 20), new PatitoAlternativo(ejeX = 22, subio = false), new Patito(ejeX = 24), new Patito(ejeX = 26), new PatitoAlternativo(ejeX = 28), new Patito(ejeX = 30), new Patito(ejeX = 32), new Patito(ejeX = 34), new Cofre(ejeX = 36), new Patito(ejeX = 38), new PatitoAlternativo(ejeX = 40, subio = false), new Patito(ejeX = 42), new Patito(ejeX = 44), new PatitoAlternativo(ejeX = 46, subio=false), new Patito(ejeX = 48), new Patito(ejeX = 50), new Patito(ejeX = 52), new PatitoAlternativo(ejeX = 54), new Patito(ejeX = 56), new PatitoAlternativo(ejeX = 58, subio =false), new PatitoAlternativo(ejeX = 60), new Patito(ejeX = 62), new Patito(ejeX = 64), new Patito(ejeX = 66), new PatitoAlternativo(ejeX = 68, subio=false), new Patito(ejeX = 70), new Patito(ejeX = 72), new Patito(ejeX = 74), new PatitoAlternativo(ejeX = 76), new PatitoAlternativo(ejeX = 78, subio =false), new Patito(ejeX = 80), new Patito(ejeX = 82), new Patito(ejeX = 84), new PatitoAlternativo(ejeX = 86), new Patito(ejeX = 88), new Patito(ejeX = 90), new PatitoAlternativo(ejeX = 92, subio=false), new Patito(ejeX = 94), new Patito(ejeX = 96)]
+            self.configurate()
+            quack.play() 
+            })
     }
     
     method configurate() {
         // añadimos interfaz
         game.clear()
-        [contadorBalas, tiempo, patitosDetonados].forEach {interfaz => interfaz.reiniciar()}
+        [contadorBalas, tiempo, patitosDetonados, contadorPuntos].forEach {interfaz => interfaz.reiniciar()}
+        game.addVisual(contadorPuntos)
         game.addVisual(tiempo)
         game.addVisual(patitosDetonados)
         game.addVisual(contadorBalas)
@@ -54,8 +62,10 @@ object juego {
         game.onTick(1000, "tiempo", {
             tiempo.restar()
             if (tiempo.contador() == 0 or contadorBalas.balas() == 0) {
-                game.addVisual(new Texto(text="¡Tiempo!", position=game.center()))
-                game.addVisual(new Texto(text="Record: " + patitosDetonados.cantidad() + " patitos detonados.", position = game.at(7, 3)))
+                [tiempo, patitosDetonados, contadorPuntos, contadorBalas].forEach {interfaz => game.removeVisual(interfaz)}
+                game.addVisual(new Texto(text="¡Tiempo!", position=game.at(7, 5)))
+                game.addVisual(new Texto(text="Patitos detonados: " + patitosDetonados.cantidad(), position = game.at(7, 4)))
+                game.addVisual(new Texto(text="Puntos: " + contadorPuntos.puntos(), position = game.at(7, 3)))
                 game.addVisual(new Texto(text="¿Jugar de vuelta? (R)", position = game.at(7, 1)))
                 game.removeVisual(mira)
             }
@@ -65,15 +75,21 @@ object juego {
         keyboard.space().onPressDo {
             contadorBalas.gastarBala()
             var objetoEncontrado = objetos.find { patito => game.onSameCell(patito.position(), mira.position())}
-            if (objetoEncontrado != null) {
+            if (objetoEncontrado != null and contadorBalas.balas() != 0 and tiempo.contador() != 0) {
                 game.removeVisual(objetoEncontrado)
                 if (objetoEncontrado.tipo() == "Patito") {
+                    if (objetoEncontrado.esEspecial()) {
+                        contadorPuntos.sumar(200)
+                    }
                     patitosDetonados.sumar()
                     sonidoGolpe.play()
+                    contadorPuntos.sumar(100)
                 } else if (objetoEncontrado.tipo() == "Cofre") {
                     contadorBalas.sumar(5)
+                    recargarSonido.play()
                 } else if (objetoEncontrado.tipo() == "Reloj") {
                     tiempo.sumar(5)
+                    relojSonido.play()
                 }
             } 
         }

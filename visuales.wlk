@@ -9,11 +9,13 @@ class Patito {
 	method moverse() {
         position = position.left(1)
 	}
+    method esEspecial() = false
 }
 
 class PatitoAlternativo inherits Patito {
     var subio = true
 
+    override method esEspecial() = true
     method subirBajar()  { 
         if (subio) {
             position = position.down(1)
@@ -71,11 +73,11 @@ object tiempoFuera {
 }
 
 object tiempo {
-    var property position = game.at(2, 8)
+    var property position = game.at(2, 7)
     method text() = "Tiempo: " + self.contador()
-    var property textColor = "000000"
+    var property textColor = "#000000"
 
-    var contador = 10
+    var contador = 20
     method contador() = contador
     method restar() {
         contador = (contador - 1).max(0)
@@ -84,12 +86,12 @@ object tiempo {
         contador += segundos
     }
     method reiniciar() {
-        contador = 10
+        contador = 20
     }
 }
 
 object patitosDetonados {
-    var property position = game.at(4, 8)
+    var property position = game.at(5, 7)
     method text() = "Patitos: " + self.cantidad()
     var property textColor = "#000000"
 
@@ -104,20 +106,35 @@ object patitosDetonados {
 }
 
 object contadorBalas {
-    var property position = game.at(6, 8)
+    var property position = game.at(8, 7)
     method text() = "Balas restantes: " + self.balas()
     var property textColor = "#000000"
-    var balas = 10
+    var balas = 20
 
     method balas() = balas
     method gastarBala() {
         balas = (balas - 1).max(0)
     }
     method reiniciar() {
-        balas = 10
+        balas = 20
     }
     method sumar(cantBalas) {
         balas += cantBalas
+    }
+}
+
+object contadorPuntos {
+    var property position = game.at(11, 7)
+    method text() = "Puntos: " + self.puntos()
+    var property textColor = "#000000"
+    var puntos = 0
+
+    method puntos() = puntos
+    method reiniciar() {
+        puntos = 0
+    }
+    method sumar(cantPuntos) {
+        puntos += cantPuntos
     }
 }
 

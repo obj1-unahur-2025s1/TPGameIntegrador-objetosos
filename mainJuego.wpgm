@@ -7,7 +7,7 @@ import sonidos.*
 program FeriaJuego {
 	game.title("Patitos Pepones")
 	game.width(14.2)
-	game.height(8)
+	game.height(8.2)
 	game.boardGround("fondoNuevo.png")
 
 	cancionFondo.play()
