@@ -2,7 +2,6 @@ import visuales.*
 import sonidos.*
 
 object juego {
-    var dificultad = null
     var objetos = null
 
     method iniciar() {
@@ -77,20 +76,8 @@ object juego {
             var objetoEncontrado = objetos.find { patito => game.onSameCell(patito.position(), mira.position())}
             if (objetoEncontrado != null and contadorBalas.balas() != 0 and tiempo.contador() != 0) {
                 game.removeVisual(objetoEncontrado)
-                if (objetoEncontrado.tipo() == "Patito") {
-                    if (objetoEncontrado.esEspecial()) {
-                        contadorPuntos.sumar(200)
-                    }
-                    patitosDetonados.sumar()
-                    sonidoGolpe.play()
-                    contadorPuntos.sumar(100)
-                } else if (objetoEncontrado.tipo() == "Cofre") {
-                    contadorBalas.sumar(5)
-                    recargarSonido.play()
-                } else if (objetoEncontrado.tipo() == "Reloj") {
-                    tiempo.sumar(5)
-                    relojSonido.play()
-                }
+                objetoEncontrado.recibirDisparo()
+                contadorPuntos.sumar(objetoEncontrado.puntosQueDa())
             } 
         }
 

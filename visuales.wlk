@@ -1,21 +1,25 @@
 // Elementos del visuales: 
+import sonidos.*
+
 class Patito {
     var ejeX 
 	var property position = game.at(ejeX, 4)
     method image() = "patito.png"
     method position() = position
-    method tipo() = "Patito"
 
 	method moverse() {
         position = position.left(1)
 	}
-    method esEspecial() = false
+    method recibirDisparo() {
+        patitosDetonados.sumar()
+        sonidoGolpe.play()
+    }
+    method puntosQueDa() = 100
 }
 
 class PatitoAlternativo inherits Patito {
     var subio = true
 
-    override method esEspecial() = true
     method subirBajar()  { 
         if (subio) {
             position = position.down(1)
@@ -26,6 +30,7 @@ class PatitoAlternativo inherits Patito {
         subio = !subio
     }
 
+    override method puntosQueDa() = 300
     override method moverse() {
         super()
         self.subirBajar()
@@ -34,12 +39,20 @@ class PatitoAlternativo inherits Patito {
 
 class Cofre inherits Patito {
     override method image() = "cofre.png"
-    override method tipo() = "Cofre"
+    override method puntosQueDa() = 50
+    override method recibirDisparo() {
+        contadorBalas.sumar(5)
+        recargarSonido.play()
+    }
 }
 
 class Reloj inherits Patito {
     override method image() = "reloj.png"
-    override method tipo() = "Reloj"
+    override method puntosQueDa() = 50
+    override method recibirDisparo() {
+        tiempo.sumar(5)
+        relojSonido.play()
+    }
 }
 
 object mira {
