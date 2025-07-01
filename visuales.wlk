@@ -1,6 +1,28 @@
 // Elementos del visuales: 
 import sonidos.*
 
+
+class Contador {
+    var ejeX
+    var texto
+    var valorInicial
+
+    var contador = valorInicial
+    var property textColor = "#000000"
+    var property position = game.at(ejeX, 7)
+    method text() = texto + contador
+    method contador() = contador
+    method sumar(n) {
+        contador += n
+    }
+    method restar(n) {
+        contador = (contador - n).max(0)
+    }
+    method reiniciar() {
+        contador = valorInicial
+    }
+}
+
 class Patito {
     var ejeX 
 	var property position = game.at(ejeX, 4)
@@ -11,10 +33,11 @@ class Patito {
         position = position.left(1)
 	}
     method recibirDisparo() {
-        patitosDetonados.sumar()
+        patitosDetonados.sumar(1)
         sonidoGolpe.play()
     }
     method puntosQueDa() = 100
+    method contador() = 1
 }
 
 class PatitoAlternativo inherits Patito {
@@ -35,6 +58,11 @@ class PatitoAlternativo inherits Patito {
         super()
         self.subirBajar()
     }
+}
+
+class PatitoMalo inherits Patito {
+    override method image() = "patitoMalo.png"
+    override method puntosQueDa() = -400
 }
 
 class Cofre inherits Patito {
@@ -85,6 +113,8 @@ object tiempoFuera {
     var property text = "¡Tiempo!"
 }
 
+
+
 object tiempo {
     var property position = game.at(2, 7)
     method text() = "Tiempo: " + self.contador()
@@ -92,11 +122,11 @@ object tiempo {
 
     var contador = 20
     method contador() = contador
-    method restar() {
-        contador = (contador - 1).max(0)
+    method restar(n) {
+        contador = (contador - n).max(0)
     }
-    method sumar(segundos) {
-        contador += segundos
+    method sumar(n) {
+        contador += n
     }
     method reiniciar() {
         contador = 20
@@ -105,60 +135,69 @@ object tiempo {
 
 object patitosDetonados {
     var property position = game.at(5, 7)
-    method text() = "Patitos: " + self.cantidad()
+    method text() = "Patitos: " + contador
     var property textColor = "#000000"
 
-    var cantidad = 0
-    method cantidad() = cantidad
-    method sumar() {
-        cantidad += 1
+    var contador = 0
+    method contador() = contador
+    method sumar(n) {
+        contador += n
     }
     method reiniciar() {
-        cantidad = 0
+        contador = 0
     }
 }
 
 object contadorBalas {
     var property position = game.at(8, 7)
-    method text() = "Balas restantes: " + self.balas()
+    method text() = "Balas restantes: " + contador
     var property textColor = "#000000"
-    var balas = 20
+    var contador = 20
 
-    method balas() = balas
-    method gastarBala() {
-        balas = (balas - 1).max(0)
+    method contador() = contador
+    method restar(n) {
+        contador = (contador - n).max(0)
     }
     method reiniciar() {
-        balas = 20
+        contador = 20
     }
-    method sumar(cantBalas) {
-        balas += cantBalas
+    method sumar(n) {
+        contador += n
     }
 }
 
 object contadorPuntos {
     var property position = game.at(11, 7)
-    method text() = "Puntos: " + self.puntos()
+    method text() = "Puntos: " + contador
     var property textColor = "#000000"
-    var puntos = 0
+    var contador = 0
 
-    method puntos() = puntos
+    method contador() = contador
     method reiniciar() {
-        puntos = 0
+        contador = 0
     }
-    method sumar(cantPuntos) {
-        puntos += cantPuntos
+    method sumar(n) {
+        contador += n
+    }
+    method restar(n) {
+        contador = (contador - n).max(0)
     }
 }
 
 // Imagen de inicio 
-object imagenInicio1 {
-    method image() = "inicio1.png"
+object pantalla {
+    var imagen = "inicio1.png"
+    method image() = imagen
     method position() = game.origin()
-}
 
-// Imagen de inicio 2 
-object imagenInicio2 {
-    method image() = "inicio2.png"
-    method position() = game.origin()
+    method cambiarImagen() {
+        imagen = "inicio2.png"
+    }
+    method imagenFinal() {
+        imagen = "pantalla_final.png"
+    }
+    method reiniciar() {
+        imagen = "inicio1.png"
+    }
+
 }

@@ -3,20 +3,21 @@ import sonidos.*
 
 object juego {
     var objetos = null
+    
 
     method iniciar() {
         game.clear()
-
+    
         //Imagenes de pantalla de inicio:
-        game.addVisual(imagenInicio1)
+        game.addVisual(pantalla)
         keyboard.enter().onPressDo { 
-            game.removeVisual(imagenInicio1)
-            game.addVisual(imagenInicio2)
+            pantalla.cambiarImagen()
             quack.play()
         }
 
+
         keyboard.num1().onPressDo( {
-            objetos = [new Patito(ejeX = 14), new Patito(ejeX = 16), new Patito(ejeX = 18), new Patito(ejeX = 20), new Patito(ejeX = 22), new Patito(ejeX = 24), new Patito(ejeX = 26), new Patito(ejeX = 28), new Patito(ejeX = 30), new Patito(ejeX = 32), new Patito(ejeX = 34), new Cofre(ejeX = 36), new Patito(ejeX = 38), new Patito(ejeX = 40), new Reloj(ejeX=42), new Patito(ejeX = 44), new Patito(ejeX = 46), new Patito(ejeX = 48), new Patito(ejeX = 50), new Patito(ejeX = 52), new Patito(ejeX = 54), new Patito(ejeX = 56), new Patito(ejeX = 58), new Patito(ejeX = 60), new Patito(ejeX = 62), new Patito(ejeX = 64), new Patito(ejeX = 66), new Patito(ejeX = 68), new Patito(ejeX = 70), new Patito(ejeX = 72), new Patito(ejeX = 74), new Patito(ejeX = 76), new Patito(ejeX = 78), new Patito(ejeX = 80), new Patito(ejeX = 82), new Patito(ejeX = 84), new Patito(ejeX = 86), new Patito(ejeX = 88), new Cofre(ejeX = 90), new Patito(ejeX = 92), new Patito(ejeX = 94), new Patito(ejeX = 96), new Patito(ejeX = 98), new Patito(ejeX = 100), new Patito(ejeX = 102), new Patito(ejeX = 104), new Patito(ejeX = 106), new Patito(ejeX = 108), new Patito(ejeX = 110)]
+            objetos = [new Patito(ejeX = 14), new Patito(ejeX = 16), new Patito(ejeX = 18), new Patito(ejeX = 20), new PatitoMalo(ejeX = 22), new Patito(ejeX = 24), new Patito(ejeX = 26), new Patito(ejeX = 28), new Patito(ejeX = 30), new PatitoMalo(ejeX = 32), new Patito(ejeX = 34), new Cofre(ejeX = 36), new PatitoMalo(ejeX = 38), new Patito(ejeX = 40), new Reloj(ejeX=42), new Patito(ejeX = 44), new Patito(ejeX = 46), new Patito(ejeX = 48), new Patito(ejeX = 50), new Patito(ejeX = 52), new Patito(ejeX = 54), new Patito(ejeX = 56), new Patito(ejeX = 58), new Patito(ejeX = 60), new Patito(ejeX = 62), new Patito(ejeX = 64), new Patito(ejeX = 66), new Patito(ejeX = 68), new Patito(ejeX = 70), new Patito(ejeX = 72), new Patito(ejeX = 74), new Patito(ejeX = 76), new Patito(ejeX = 78), new Patito(ejeX = 80), new Patito(ejeX = 82), new Patito(ejeX = 84), new Patito(ejeX = 86), new Patito(ejeX = 88), new Cofre(ejeX = 90), new Patito(ejeX = 92), new Patito(ejeX = 94), new Patito(ejeX = 96), new Patito(ejeX = 98), new Patito(ejeX = 100), new Patito(ejeX = 102), new Patito(ejeX = 104), new Patito(ejeX = 106), new Patito(ejeX = 108), new Patito(ejeX = 110)]
             self.configurate() 
             quack.play()
             })
@@ -28,61 +29,70 @@ object juego {
     }
     
     method configurate() {
-        // añadimos interfaz
+        // Añadimos interfaz
         game.clear()
-        [contadorBalas, tiempo, patitosDetonados, contadorPuntos].forEach {interfaz => interfaz.reiniciar()}
-        game.addVisual(contadorPuntos)
-        game.addVisual(tiempo)
-        game.addVisual(patitosDetonados)
-        game.addVisual(contadorBalas)
         
-        //añadimos musica y sonidos
+
+        // var tiempo = new Contador(ejeX = 2, texto = "Tiempo: ", valorInicial = 20)
+        // var patitosDetonados = new Contador(ejeX = 5, texto = "Patitos: ", valorInicial = 0)
+        // var contadorBalas = new Contador(ejeX = 8, texto = "Balas restantes: ", valorInicial = 20 )
+        // var contadorPuntos = new Contador(ejeX = 11, texto = "Puntos: ", valorInicial = 0)
+
+        [contadorBalas, tiempo, patitosDetonados, contadorPuntos].forEach { interfaz => 
+            game.addVisual(interfaz)
+            interfaz.reiniciar()
+        }
+        
+        // Añadimos musica y sonidos
         game.sound(cancionFondo)
         game.sound(sonidoGolpe)
 
-        // añadimos patitos y mira
-        objetos.forEach { patito => game.addVisual(patito) }
+        // Aca añadimos patitos y mira
+        objetos.forEach { objeto => game.addVisual(objeto) }
         game.addVisual(mira)
 
-        // que cada un segundo, se muevan
+        // Para que cada 1/4 de segundo, se muevan
         game.onTick(250, "movimiento", { 
-            objetos.forEach { patito => patito.moverse() }
+            objetos.forEach { objeto => objeto.moverse() }
             })
         
-        // que se mueva la mira
+        // Para que se mueva la mira
         game.onTick(50, "movimiento de la mira", {
             mira.moverse()
+            // Esto evita que la mira se salga del tablero, y cambie de direccion al llegar a un extremo
             if (mira.position().x() == game.width() - 1.2 or mira.position().x() == 0) {
                 mira.cambiarDireccion()
             }
         })
         
-        // para que el tiempo se actualice
+        // Para que el tiempo se actualice
         game.onTick(1000, "tiempo", {
-            tiempo.restar()
-            if (tiempo.contador() == 0 or contadorBalas.balas() == 0) {
-                [tiempo, patitosDetonados, contadorPuntos, contadorBalas].forEach {interfaz => game.removeVisual(interfaz)}
-                game.addVisual(new Texto(text="¡Tiempo!", position=game.at(7, 5)))
-                game.addVisual(new Texto(text="Patitos detonados: " + patitosDetonados.cantidad(), position = game.at(7, 4)))
-                game.addVisual(new Texto(text="Puntos: " + contadorPuntos.puntos(), position = game.at(7, 3)))
-                game.addVisual(new Texto(text="¿Jugar de vuelta? (R)", position = game.at(7, 1)))
+            tiempo.restar(1)
+            // En caso de que se acabe el tiempo o las balas, el juego termina
+            if (tiempo.contador() == 0 or contadorBalas.contador() == 0) {
+                [contadorBalas, tiempo, patitosDetonados, contadorPuntos].forEach {interfaz => game.removeVisual(interfaz)}
+                game.addVisual(new Texto(text="Patitos detonados: " + patitosDetonados.contador(), position = game.at(7, 4)))
+                game.addVisual(new Texto(text="Puntos: " + contadorPuntos.contador(), position = game.at(7, 3)))
+                pantalla.imagenFinal()
+                game.addVisual(pantalla)
                 game.removeVisual(mira)
             }
         })
         
-        // matar patito
+        // Para dispararle a un objeto con espacio
         keyboard.space().onPressDo {
-            contadorBalas.gastarBala()
+            contadorBalas.restar(1)
             var objetoEncontrado = objetos.find { patito => game.onSameCell(patito.position(), mira.position())}
-            if (objetoEncontrado != null and contadorBalas.balas() != 0 and tiempo.contador() != 0) {
+            if (objetoEncontrado != null and contadorBalas.contador() != 0 and tiempo.contador() != 0) {
                 game.removeVisual(objetoEncontrado)
                 objetoEncontrado.recibirDisparo()
                 contadorPuntos.sumar(objetoEncontrado.puntosQueDa())
             } 
         }
 
-        // reiniciar
+        // Para reiniciar
         keyboard.r().onPressDo {
+            pantalla.reiniciar()
             self.iniciar()
         }
     }
